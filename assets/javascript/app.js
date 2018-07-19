@@ -4,7 +4,7 @@ function popitup(url,windowName) {
        if (window.focus) {newwindow.focus()}
        return false;
 }
-let uriRedirectTest = "https://project-1-hackers.github.io/Project-1-BootCamp/apiredirect.html"
+let uriRedirectTest = "https://127.0.0.1/apiredirect.html"
 spotifyWindow = `https://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uriRedirectTest}/&response_type=code`
 
 popitup(spotifyWindow, "test")
