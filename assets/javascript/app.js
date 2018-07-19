@@ -3,8 +3,8 @@ function popitup(url,windowName) {
        newwindow=window.open(url,windowName,'height=700,width=400');
        if (window.focus) {newwindow.focus()}
 }
-let uriRedirectTest = "http://127.0.0.1:8080/apiredirect.html"
-spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uriRedirectTest}&response_type=token`
+let uri_Redirect = ["http://127.0.0.1:8080/apiredirect.html"]
+spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uri_Redirect[0]}&response_type=token`
 
 
 if (localStorage.getItem("spotifyAPItoken") === null) {
@@ -28,9 +28,6 @@ $("#apiTest").click(() => {$.ajax(
     data: {
       "q": "run the jewels",
       "type": "artist"
-      // "client_id":  "0bfbe170f82c46a089b7d9d412592492",
-      // "redirect_uri":  "../../index.html",
-      // "scope":  "user-read-private user-read-email"
     },
     success: function(result) {
       console.log(result)
