@@ -18,15 +18,15 @@ if (localStorage.getItem("spotifyAPItoken") === null) {
 }
 
 
-$("#apiTest").click(() =>{$.ajax(
+$("#apiTest").click(() => {$.ajax(
   {
     method: "GET",
     url: "https://api.spotify.com/v1/search",
     headers: {
-      "authorization": localStorage.getItem('spotifyAPItoken')
+      "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
     },
     data: {
-      "q": "name:run the jewels",
+      "q": "run the jewels",
       "type": "artist"
       // "client_id":  "0bfbe170f82c46a089b7d9d412592492",
       // "redirect_uri":  "../../index.html",
