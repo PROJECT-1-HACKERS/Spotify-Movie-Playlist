@@ -55,7 +55,8 @@ function songListMaker(arr, handler) {
         },
       }
     ).then(function(promise) {
-      handler(promise);
+      promisesArr.push(promise);
+      if(index == arr.length -1) {handler(promisesArr);}
     })
   })
 }
