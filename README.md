@@ -2,9 +2,9 @@
 
 This is the collaborative project for our 1/3rd progress marker!
 
-# Problems to solve
+# What we're doing
 
-Getting soundtrack info from movies
+We are getting soundtrack info from movies and creating a spotify playlist from them. 
 
 # Blockers
 
@@ -12,7 +12,7 @@ No IMDb API - maybe use google search api as a work around  --- Corey currently 
 
 # MVP
 
-Jesse
+Retrieving Soundtrack Info from user submitted movie
 
 ## Authors
 
