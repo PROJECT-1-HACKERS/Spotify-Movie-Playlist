@@ -1,8 +1,8 @@
-var currentURL = window.location.href
+var newURL = new URL('http://www.google.com/?'+window.location.hash.substr(1));
 
-var newURL = new URL(currentURL);
+var token = newURL.searchParams.get("access_token");
+var tokenExpiry = newURL.searchParams.get("expires_in");
 
-var code = newURL.searchParams.get("code")
-
-localStorage.setItem("spotifyAPIcode", code)
+localStorage.setItem("spotifyAPItoken", token);
+localStorage.setItem("spotifyExpiresIn", tokenExpiry);
 window.close();
