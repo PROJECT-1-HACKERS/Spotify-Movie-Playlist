@@ -2,6 +2,18 @@
 
 This is the collaborative project for our 1/3rd progress marker!
 
+# Problems to solve
+
+Getting soundtrack info from movies
+
+# Blockers
+
+No IMDb API - maybe use google search api as a work around  --- Corey currently working on
+
+# MVP
+
+Jesse
+
 ## Authors
 
 * **Jesse Webb** - *Stuff!* - [Kayle7777](https://github.com/kayle7777)
