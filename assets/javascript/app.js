@@ -4,7 +4,8 @@ function popitup(url,windowName) {
        if (window.focus) {newwindow.focus()}
 }
 let uri_Redirect = ["http://127.0.0.1:8080/apiredirect.html"]
-spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uri_Redirect[0]}&response_type=token`
+let scopes = "user-read-email user-read-private user-read-birthdate"
+spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uri_Redirect[0]}&scope=${scopes}&response_type=token`
 
 
 if (localStorage.getItem("spotifyAPItoken") === null) {
@@ -17,20 +18,60 @@ if (localStorage.getItem("spotifyAPItoken") === null) {
   $("#apiWarningModal").modal();
 }
 
-
-$("#apiTest").click(() => {$.ajax(
-  {
+function getUserId(handler) {
+  $.ajax({
     method: "GET",
-    url: "https://api.spotify.com/v1/search",
+    url: "https://api.spotify.com/v1/me",
     headers: {
-      "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
-    },
-    data: {
-      "q": "run the jewels",
-      "type": "artist"
-    },
-    success: function(result) {
-      console.log(result)
-    },
-  }
-)});
+      "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken'),
+      "Accept": "application/json",
+      "Content-type": "application/json"
+    }
+  }).then(function(response) {
+    handler(response.id);
+  })
+  return;
+}
+
+
+let songList = ["Legend Has It", "Eye of the Tiger", "Sabotage", "Call Ticketron", "Buddy Holly", "Particle Man"]
+let spotifyList = [];
+
+function listMapper() {
+  songList.map((song, index) => {
+    $.ajax({
+        method: "GET",
+        url: "https://api.spotify.com/v1/search",
+        headers: {
+          "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
+        },
+        data: {
+          "q": song,
+          "type": "track",
+          "limit": "1"
+        },
+        success: function(result) {
+          spotifyList.push(result.tracks.items[0].id)
+        },
+      }
+    )
+  })
+}
+
+// $("#apiSubmit").click(() => {$.ajax(
+//   {
+//     method: "GET",
+//     url: "https://api.spotify.com/v1/search",
+//     headers: {
+//       "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
+//     },
+//     data: {
+//       "q": $("#apiInputQuery").val().trim().toLowerCase(),
+//       "type": $("#apiInputType").val().trim().toLowerCase()
+//     },
+//     success: function(result) {
+//       console.log(result)
+//     },
+//   }
+// )
+// });
