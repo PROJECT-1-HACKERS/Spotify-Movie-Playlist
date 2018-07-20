@@ -22,10 +22,12 @@ function imdbAjax(name){
         // Parses web page to readable HTML
         body = '<div id="body-mock">' + result.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
         var $body = $(body);
-        var b1 = $body[0].closest("#body-mock", "#wrapper")
 
-        console.log(b1)
-        // console.log($body[0].find())
+        // Current Issue
+        // Trying to target the specific div atm
+        var targetDiv = $body[0].closest("#body-mock", "#wrapper")
+
+        console.log(targetDiv)
       }
     })
 
