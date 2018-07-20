@@ -1,13 +1,20 @@
-johnWick = "john wick"
+function imdbAjax(name){
+  var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
 
-var queryURL = "http://www.omdbapi.com/?t=" + johnWick + "&apikey=76978dc"
+  $.ajax( {
+      url: queryURL,
+      method: "GET"
+  }).then(function(response) {
+    console.log(response.imdbID);
+    $.ajax( {
+      url: `https://cors.io/?https://www.imdb.com/title/${response.imdbID}/soundtrack`,
+      method: "GET",
+      crossDomain: true,
+      dataType: "html",
+      success: function(result) {
+        console.log(result);
+      }
+    })
 
-$.ajax( {
-    url: queryURL,
-    method: "GET"
-}).then(function(response) {
-  var test = `https://www.imdb.com/title/${response.imdbID}/soundtrack`
-
-  console.log(test)
-
-})
+  })
+}
