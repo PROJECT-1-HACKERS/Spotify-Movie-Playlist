@@ -40,4 +40,4 @@ function imdbAjax(name){
 }
 
 // passing thru John Wick to test responses.
-imdbAjax("Super Troopers")
+imdbAjax("John Wick")
