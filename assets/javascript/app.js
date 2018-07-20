@@ -23,10 +23,15 @@ function imdbAjax(name){
         body = '<div id="body-mock">' + result.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
 
         // Target specific div needed
-        var $body = $(body).children("#wrapper").children("#root").children("#pagecontent").children("#content-2-wide").children("#main").children(".article.listo").children("#soundtracks_content").children(".list").children();
+        var $body = $(body).find("#soundtracks_content").children().children();
 
         for (var i = 0; i < $body.length; i++) {
-          console.log($body[i])
+          // logs song title
+          console.log($body[i].childNodes[0])
+
+          // logs artist
+          // Nodes are not exact so this will need a little work.
+          console.log($body[i].childNodes[3])
         }
       }
     })
