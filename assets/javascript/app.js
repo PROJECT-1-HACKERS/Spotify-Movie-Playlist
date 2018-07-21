@@ -32,8 +32,7 @@ function imdbAjax(name, callback){
 
       for (var i = 0; i < $body.length; i++) {
         // logs song title
-        callback({"trackName": Array.from($($body[i]).contents())[0].data, "artist": Array.from($($body[i]).contents().closest('a').text()).join()});
-        console.log()
+        callback({"trackName": Array.from($($body[i]).contents())[0].data, "artist": Array.from($($body[i]).contents().closest('a:first-of-type').text()).join("")});
       }
     })
   })
@@ -41,6 +40,7 @@ function imdbAjax(name, callback){
 
 class OMDBInfo {
   constructor(name) {
+    let _this = this
     // Creating var for OMDb API
     var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
     // Gets info from OMDb
@@ -48,8 +48,15 @@ class OMDBInfo {
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-      console.log(response);
-      this.poster = response.Poster
+      _this.response = response;
     })
+  }
+}
+
+class Movie {
+  constructor(arg) {
+    this.trackInfo = [];
+    imdbAjax(arg, (track) => this.trackInfo.push(track));
+    this.movieData = new OMDBInfo(arg);
   }
 }
