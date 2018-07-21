@@ -1,4 +1,5 @@
 // Function to retrieve soundtrack info from inputed movie
+let test = [];
 function imdbAjax(name){
   // Creating var for OMDb API
   var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
@@ -23,15 +24,11 @@ function imdbAjax(name){
         body = '<div id="body-mock">' + result.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
 
         // Target specific div needed
-        var $body = $(body).find("#soundtracks_content").children().children();
+        var $body = $("#soundtracks_content", body).children().children();
 
         for (var i = 0; i < $body.length; i++) {
           // logs song title
-          console.log($body[i].childNodes[0])
-
-          // logs artist
-          // Nodes are not exact so this will need a little work.
-          console.log($body[i].childNodes[3])
+          test.push(Array.from($($body[i]).contents())[0].data);
         }
       }
     })
