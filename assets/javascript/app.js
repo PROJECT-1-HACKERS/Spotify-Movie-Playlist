@@ -1,4 +1,8 @@
 // Function to retrieve soundtrack info from inputed movie
+
+
+// NOTE: EXAMPLE USAGE: imdbAjax("John Wick", (x) => test.push(x))
+
 function imdbAjax(name, callback){
   // Creating var for OMDb API
   var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
@@ -8,7 +12,8 @@ function imdbAjax(name, callback){
       url: queryURL,
       method: "GET"
   }).then(function(response) {
-    console.log(response.imdbID);
+    // console.log(response);
+  // }
 
     // Passes OMDb targeted response into cors.io to read specific web page
     $.ajax( {
@@ -27,12 +32,24 @@ function imdbAjax(name, callback){
 
       for (var i = 0; i < $body.length; i++) {
         // logs song title
-        callback(Array.from($($body[i]).contents())[0].data);
+        callback({"trackName": Array.from($($body[i]).contents())[0].data, "artist": Array.from($($body[i]).contents().closest('a').text()).join()});
+        console.log()
       }
     })
   })
 }
 
-// passing thru John Wick to test responses.
-let test = [];
-imdbAjax("John Wick", (x) => test.push(x))
+class OMDBInfo {
+  constructor(name) {
+    // Creating var for OMDb API
+    var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
+    // Gets info from OMDb
+    $.ajax( {
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      this.poster = response.Poster
+    })
+  }
+}
