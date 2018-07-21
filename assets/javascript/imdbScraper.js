@@ -1,6 +1,5 @@
 // Function to retrieve soundtrack info from inputed movie
 
-
 // NOTE: EXAMPLE USAGE: imdbAjax("John Wick", (x) => test.push(x))
 
 function imdbAjax(name, callback){
@@ -35,7 +34,7 @@ function imdbAjax(name, callback){
 
       for (var i = 0; i < $body.length; i++) {
         // logs song title
-        callback({"trackName": Array.from($($body[i]).contents())[0].data, "artist": Array.from($($body[i]).contents().closest('a:first-of-type').text()).join("")});
+        callback({"trackName": Array.from($($body[i]).contents())[0].data.trim(), "artist": Array.from($($body[i]).contents().closest('a:last-of-type').text()).join("")});
       }
     })
   })
@@ -63,3 +62,8 @@ class Movie {
     this.movieData = new OMDBInfo(arg);
   }
 }
+
+
+// For testing application
+var test = []
+imdbAjax("Blade Runner", (x) => test.push(x))
