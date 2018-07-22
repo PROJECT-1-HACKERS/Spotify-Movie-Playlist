@@ -79,5 +79,5 @@ class Movie {
 
 
 // For testing application
-var test = []
-imdbAjax("Blade Runner", (x) => test.push(x))
+// var test = []
+// imdbAjax("Blade Runner", (x) => test.push(x))

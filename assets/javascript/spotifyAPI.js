@@ -4,7 +4,7 @@ function popitup(url,windowName) {
        if (window.focus) {newwindow.focus()}
 }
 let uri_Redirect = ["http://127.0.0.1:8080/apiredirect.html"]
-let scopes = "user-read-email user-read-private user-read-birthdate"
+let scopes = "user-read-email user-read-private user-read-birthdate playlist-modify-public playlist-modify-private"
 spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uri_Redirect[0]}&scope=${scopes}&response_type=token`
 
 
