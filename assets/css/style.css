@@ -3,4 +3,34 @@
 }
 .container {
     text-align: center;
+    background: url("http://arthuspictures.com/wp-content/uploads/2014/07/image-visuel.jpg");
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     max-height: 50px;
+     overflow: auto;
+     
+}
+
+.container {
+    text-align: center;
+}
+
+
+
+.accordion {
+    float: center;
+    margin: auto;
+}
+
+.innercard {
+    width: 300px;
+    height: 100px;
+    margin: auto;
+}
+
+
+
+.card-header {
+    background: darkolivegreen;
+    color: white;
 }
