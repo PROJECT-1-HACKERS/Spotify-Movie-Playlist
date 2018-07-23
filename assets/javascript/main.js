@@ -25,7 +25,7 @@ $("#movieInputSubmit").click(function() {
         });
         let playlistButton = $("<button>");
         playlistButton.text("Create Spotify Playist");
-        playlistButton.attr("class", "btn btn-warning");
+        playlistButton.attr("class", "btn btn-outline-success");
         playlistButton.click(function() {
           console.log(spotifyTrackIdList)
           $.ajax({
