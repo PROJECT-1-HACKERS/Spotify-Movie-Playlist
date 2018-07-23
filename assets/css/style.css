@@ -1,6 +1,4 @@
-.carousel-inner .carousel-item img {
-  
-}
+
 .container {
     text-align: center;
     background: url("http://arthuspictures.com/wp-content/uploads/2014/07/image-visuel.jpg");
@@ -31,6 +29,20 @@
 
 
 .card-header {
-    background: darkolivegreen;
+    background: url("https://d1u5p3l4wpay3k.cloudfront.net/theforest_gamepedia/thumb/4/44/Mountainarea.jpg/1200px-Mountainarea.jpg");
     color: white;
+}
+
+.jumbotron {
+    color: white;
+    position: relative;
+    padding: 10px !important;
+    margin-top: 70px !important;
+    background: #eee;
+    margin-top: 23px;
+    text-align: center;
+    margin-bottom: 0 !important;
+    border-radius: 25px;
+    border: white;
+    background: url("https://t3.ftcdn.net/jpg/01/50/02/58/240_F_150025823_0rxPftXVTDeFvuwRD166mUqVDcJaeNYV.jpg")
 }
