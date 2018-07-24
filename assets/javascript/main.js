@@ -12,6 +12,14 @@ $("#movieInputSubmit").click(function() {
   getUserId((x) => userId = x);
   movieInputClick(
     (data) => {
+// ====================================================================================
+
+
+// Data is a custom array with the trackInfo from the imdbScraper, and also with "movieData", which is the exact response from a regular OMDB Ajax call. I.E., access via "data.movieData.response";
+// This is where you would build functionality to show the posters, other stuff, et cetera.
+
+
+// ====================================================================================
       setTimeout(function() {
         let playlistId;
         $("#soundTrackList").empty();
