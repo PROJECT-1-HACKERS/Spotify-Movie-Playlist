@@ -46,6 +46,7 @@
 .card-header {
     background: rgb(130, 179, 57);
     color: white;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
 }
 
 .no-margin-lr { 
