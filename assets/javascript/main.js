@@ -15,6 +15,7 @@ $("#movieInputSubmit").click(function() {
       setTimeout(function() {
         let playlistId;
         $("#soundTrackList").empty();
+
         let trackNames = data.trackInfo.map((x) => x.trackName);
         trackNames.map((eachName, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${eachName}</li>`));
 // ====================================================================================
@@ -36,6 +37,7 @@ $("#movieInputSubmit").click(function() {
         playlistButton.text("Create Spotify Playlist");
         playlistButton.click(function() {
           console.log(trackNames);
+          let pushUrl = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?uris=`
           for (var i = 0; i < trackNames.length; i++) {
             $.ajax({
               method: "GET",
@@ -50,18 +52,23 @@ $("#movieInputSubmit").click(function() {
               },
             }).then(function(response) {
               let trackId = response.tracks.items[0].id;
-              let dumbUrl = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?uris=`
-              dumbUrl = dumbUrl+ "spotify%3Atrack%3A"+trackId;
-              $.ajax({
-                method: "POST",
-                url: dumbUrl,
-                headers: {
-                  "Authorization": "Bearer " + localStorage.getItem('spotifyAPItoken'),
-                  "Content-Type": "application/json"
-                }
-              })
+              if (i == trackNames.length-1) {
+                pushUrl = pushUrl+ "spotify%3Atrack%3A"+trackId;
+              } else {
+                pushUrl = pushUrl+ "spotify%3Atrack%3A"+trackId+",";
+              }
             })
           }
+          setTimeout(function() {
+            console.log(pushUrl)
+            $.ajax({
+            method: "POST",
+            url: pushUrl,
+            headers: {
+              "Authorization": "Bearer " + localStorage.getItem('spotifyAPItoken'),
+              "Content-Type": "application/json"
+            }
+          })}, 500)
         })
         $("#createPlaylistButton").append(playlistButton);
       }, 900)
