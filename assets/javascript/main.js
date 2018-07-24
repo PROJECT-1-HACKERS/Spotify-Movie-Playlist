@@ -1,10 +1,3 @@
-// let userId, movieVal;
-//
-// function movieInputClick(callback) {
-//   let moVal = $("#movieInput").val().trim();
-//   movieVal = moVal;
-//   let movie = callback(new Movie(moVal));
-// }
 
 $("#movieInputSubmit").click(async function() {
   let movieName = $("#movieInput").val().trim();
@@ -12,9 +5,15 @@ $("#movieInputSubmit").click(async function() {
   spotifyUserId = spotifyUserId.id;
   let omdbData = await omdbAjax(movieName);
   let imdbSoundtrackData = await parseimdbAjax(movieName);
-  // ====================================================================================
   $("#soundTrackList").empty();
+  $("#createPlaylistButton").empty();
   imdbSoundtrackData.map((data, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${data.trackName}</li>`))
+  // ====================================================================================
+  // Use omdbData to create some of the rest of the site functionality, like putting up the poster and whatnot.
+  // console.log(omdbData); // this will be the typical OMDB response you're used to
+
+
+  // ====================================================================================
   let playlistButton = $("<button class='btn btn-warning'>");
   playlistButton.text("Create Spotify Playlist");
   playlistButton.click(async function() {
@@ -24,13 +23,11 @@ $("#movieInputSubmit").click(async function() {
     let pushUrl = `https://api.spotify.com/v1/users/${spotifyUserId}/playlists/${playlistId}/tracks?uris=`
     const searchResults = await Promise.all(imdbSoundtrackData.map(async function(songName, i, arr) {
       let trackUrl = await spotifyTrackSearch(songName.trackName);
-      trackUrl = trackUrl.tracks.items[0].id
-      if (i == arr.length-1) {
-        pushUrl = pushUrl+ "spotify%3Atrack%3A"+trackUrl;
-      } else {
-        pushUrl = pushUrl+ "spotify%3Atrack%3A"+trackUrl+",";
+      if (trackUrl.tracks.items.length > 0) {
+        pushUrl += "spotify%3Atrack%3A"+trackUrl.tracks.items[0].id+",";
       }
-    }));
+      }));
+    pushUrl.slice(0, -1);
     spotifyPostToPlaylist(pushUrl);
   })
   $("#createPlaylistButton").append(playlistButton);

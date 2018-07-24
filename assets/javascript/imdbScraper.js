@@ -50,31 +50,3 @@ async function parseimdbAjax(name) {
       }
       return returnData;
     }
-
-
-class OMDBInfo {
-  constructor(name) {
-    let _this = this
-    // Creating var for OMDb API
-    var queryURL = "http://www.omdbapi.com/?t=" + name + "&apikey=76978dc"
-    // Gets info from OMDb
-    $.ajax( {
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-      _this.response = response;
-    })
-  }
-}
-
-class Movie {
-  constructor(arg) {
-    this.trackInfo = parseimdbAjax(arg);
-    this.movieData = new OMDBInfo(arg);
-  }
-}
-
-
-// For testing application
-// var test = []
-// imdbAjax("Blade Runner", (x) => test.push(x))
