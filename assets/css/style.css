@@ -3,17 +3,32 @@
 }
 .container {
     text-align: center;
-     background-attachment: fixed;
-     max-height: 50px;
-     overflow: auto;
+    background-attachment: fixed;
+    max-height: 50px;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    max-width: none;
      
+}
+.heroVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+.title {
+    background: rgba(130, 179, 57, 0.6);
+    text-align: center;
+    padding: 50px;
+    margin-bottom: 50px;
 }
 
 .container {
     text-align: center;
 }
-
-
 
 .accordion {
     float: center;
@@ -29,6 +44,11 @@
 
 
 .card-header {
-    background: darkolivegreen;
+    background: rgb(130, 179, 57);
     color: white;
+}
+
+.no-margin-lr { 
+    margin-left: 0;
+    margin-right: 0;
 }
