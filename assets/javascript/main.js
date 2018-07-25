@@ -14,12 +14,12 @@ $("#movieInputSubmit").click(async function() {
 
 
   // ====================================================================================
+  // playlistButton's on click function becomes a combination of a lot of the async funcs created earlier
   let playlistButton = $("<button class='btn btn-warning'>");
   playlistButton.text("Create Spotify Playlist");
   playlistButton.click(async function() {
     let playlistId = await createSpotifyPlaylist(movieName);
     playlistId = playlistId.id;
-
     let pushUrl = `https://api.spotify.com/v1/users/${spotifyUserId}/playlists/${playlistId}/tracks?uris=`
     const searchResults = await Promise.all(imdbSoundtrackData.map(async function(songName, i, arr) {
       let trackUrl = await spotifyTrackSearch(songName.trackName);
@@ -30,5 +30,6 @@ $("#movieInputSubmit").click(async function() {
     pushUrl.slice(0, -1);
     spotifyPostToPlaylist(pushUrl);
   })
+  // ====================================================================================
   $("#createPlaylistButton").append(playlistButton);
 })
