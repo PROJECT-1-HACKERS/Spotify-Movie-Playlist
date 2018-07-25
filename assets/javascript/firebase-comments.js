@@ -43,7 +43,7 @@ $(document).ready(function () {
         html += "<h4>" + newComment.name + "</h4>";
 
         // The Next Line Adds an Avatar Photo That is Unique to User Submitted Email. Optional, will discuss with team.
-        html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.md5Email + "?s=100&d=retro'/></div>";
+        html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.md5Email + "?s=100&d=retro' width='100px'/></div>";
         html += "<p>" + newComment.message + "</p></div>";
         $("#comments-container").prepend(html);
     });
