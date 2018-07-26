@@ -1,74 +1,35 @@
-let userId, movieVal;
 
-function movieInputClick(callback) {
-  let moVal = $("#movieInput").val().trim();
-  movieVal = moVal;
-  let movie = callback(new Movie(moVal));
-}
+$("#movieInputSubmit").click(async function() {
+  let movieName = $("#movieInput").val().trim();
+  let spotifyUserId = await getUserId();
+  spotifyUserId = spotifyUserId.id;
+  let omdbData = await omdbAjax(movieName);
+  let imdbSoundtrackData = await parseimdbAjax(movieName);
+  $("#soundTrackList").empty();
+  $("#createPlaylistButton").empty();
+  imdbSoundtrackData.map((data, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${data.trackName}</li>`))
+  // ====================================================================================
+  // Use omdbData to create some of the rest of the site functionality, like putting up the poster and whatnot.
+  // console.log(omdbData); // this will be the typical OMDB response you're used to
 
-let spotifyTrackIdList = [];
-$("#movieInputSubmit").click(function() {
 
-  getUserId((x) => userId = x);
-  movieInputClick(
-    (data) => {
-      setTimeout(function() {
-        $("#soundTrackList").empty();
-        let trackNames = data.trackInfo.map((x) => x.trackName);
-        // console.log(trackNames)
-        trackNames.map((eachName, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${eachName}</li>`));
-        songIdGet(trackNames, (ajaxResponse) => {
-          for (var i = 0; i < ajaxResponse.length; i++) {
-            // console.log(ajaxResponse[i].tracks.items[0].id)
-            spotifyTrackIdList.push(ajaxResponse[i].tracks.items[0].id)
-          }
-        });
-        let playlistButton = $("<button>");
-        playlistButton.text("Create Spotify Playist");
-        playlistButton.attr("class", "btn btn-outline-success");
-        playlistButton.click(function() {
-          console.log(spotifyTrackIdList)
-          $.ajax({
-            method: "POST",
-            url: `https://api.spotify.com/v1/users/${userId}/playlists`,
-            headers: {
-              "Authorization": "Bearer "  + localStorage.getItem('spotifyAPItoken'),
-              "Content-Type": "application/json"
-            },
-            data: JSON.stringify({name: `${movieVal} soundtrack playlist`})
-          }).then(function(newPlaylist) {
-            let playlistId = newPlaylist.id;
-            let dumbUrl = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks?uris=`
-            for (var i = 0; i < spotifyTrackIdList.length; i++) {
-              if(i == spotifyTrackIdList.length-1) {
-                dumbUrl = dumbUrl+ "spotify%3Atrack%3A"+spotifyTrackIdList[i]
-
-              }else {
-                dumbUrl = dumbUrl+ "spotify%3Atrack%3A"+spotifyTrackIdList[i]+","
-              }
-            }
-            $.ajax({
-              method: "POST",
-              url: dumbUrl,
-              headers: {
-                "Authorization": "Bearer " + localStorage.getItem('spotifyAPItoken'),
-                "Content-Type": "application/json"
-              }
-            })
-          })
-        })
-        $("#createPlaylistButton").append(playlistButton);
-      }, 900)
-    })
+  // ====================================================================================
+  // playlistButton's on click function becomes a combination of a lot of the async funcs created earlier
+  let playlistButton = $("<button class='btn btn-warning'>");
+  playlistButton.text("Create Spotify Playlist");
+  playlistButton.click(async function() {
+    let playlistId = await createSpotifyPlaylist(movieName);
+    playlistId = playlistId.id;
+    let pushUrl = `https://api.spotify.com/v1/users/${spotifyUserId}/playlists/${playlistId}/tracks?uris=`
+    const searchResults = await Promise.all(imdbSoundtrackData.map(async function(songName, i, arr) {
+      let trackUrl = await spotifyTrackSearch(songName.trackName);
+      if (trackUrl.tracks.items.length > 0) {
+        pushUrl += "spotify%3Atrack%3A"+trackUrl.tracks.items[0].id+",";
+      }
+      }));
+    pushUrl.slice(0, -1);
+    spotifyPostToPlaylist(pushUrl);
+  })
+  // ====================================================================================
+  $("#createPlaylistButton").append(playlistButton);
 })
-
-
-
-
-
-// function() {
-//   let songList = x.trackInfo.map((y) => y.trackName)
-//   songIdGet(songList, (x) => {
-//     spotifyTrackIdList = x.map((y) => {return y.tracks.items[0].id})
-//     console.log(spotifyTrackIdList)
-//   }

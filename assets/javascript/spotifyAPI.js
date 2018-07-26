@@ -1,4 +1,6 @@
 
+// ====================================================================================
+// This is all spotify Authentication stuff.
 function popitup(url,windowName) {
        newwindow=window.open(url,windowName,'height=700,width=400');
        if (window.focus) {newwindow.focus()}
@@ -17,11 +19,11 @@ if (localStorage.getItem("spotifyAPItoken") === null) {
   $("#spotifyLinker").append(linkButton);
   $("#apiWarningModal").modal();
 }
+// ====================================================================================
 
-// Function to get the user's key, since it's asyncrhonous is
-// getUserId(function(output) {do thing with output}
-function getUserId(handler) {
-  $.ajax({
+
+async function getUserId() {
+  const result = $.ajax({
     method: "GET",
     url: "https://api.spotify.com/v1/me",
     headers: {
@@ -29,30 +31,60 @@ function getUserId(handler) {
       "Accept": "application/json",
       "Content-type": "application/json"
     }
-  }).then(function(response) {
-    handler(response.id);
   })
-  return;
+  return result;
 }
 
-function songIdGet(arr, handler) {
-  let promisesArr = [];
-  arr.map((song, index) => {
-    $.ajax({
-        method: "GET",
-        url: "https://api.spotify.com/v1/search",
-        headers: {
-          "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
-        },
-        data: {
-          "q": song,
-          "type": "track",
-          "limit": "1"
-        },
-      }
-    ).then(function(promise) {
-      promisesArr.push(promise);
-      if(index == arr.length -1) {handler(promisesArr);}
-    })
+async function createSpotifyPlaylist(playlistName) {
+  let userId = await getUserId()
+  const result = $.ajax({
+    method: "POST",
+    url: `https://api.spotify.com/v1/users/${userId.id}/playlists`,
+    headers: {
+      "Authorization": "Bearer "  + localStorage.getItem('spotifyAPItoken'),
+      "Content-Type": "application/json"
+    },
+    data: JSON.stringify({name: `${playlistName} soundtrack playlist`})
   })
+  return result
+}
+
+async function spotifyTrackSearch(track) {
+  let result;
+
+  try {result = $.ajax({
+    method: "GET",
+    url: "https://api.spotify.com/v1/search",
+    headers: {
+      "Authorization": 'Bearer ' + localStorage.getItem('spotifyAPItoken')
+    },
+    data: {
+      "q": track,
+      "type": "track",
+      "limit": "1"
+    }
+  })
+    return result;
+  } catch (e) {
+    if (e instanceof TypeError) {
+      console.log(e);
+    }
+  }
+}
+
+async function spotifyPostToPlaylist(pushUrl) {
+  let result;
+
+  try {result = $.ajax({
+    method: "POST",
+    url: pushUrl,
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('spotifyAPItoken'),
+      "Content-Type": "application/json"
+    }
+  })
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
 }
