@@ -9,10 +9,15 @@ $("#movieInputSubmit").click(async function() {
   $("#createPlaylistButton").empty();
   imdbSoundtrackData.map((data, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${data.trackName}</li>`))
   // ====================================================================================
-  // Use omdbData to create some of the rest of the site functionality, like putting up the poster and whatnot.
-  // console.log(omdbData); // this will be the typical OMDB response you're used to
-
-
+  console.log(omdbData); // this will be the typical OMDB response you're used to
+  $("#movieName").text(`${omdbData.Title} (${omdbData.Year})`)
+  $("#moviePoster").html(`<img id="moviePoster" src=${omdbData.Poster} class="card-img-top" alt="Card image cap">`)
+  $("#movieInfo").html(`
+    <li class="list-group-item"><strong>Rating</strong>: ${omdbData.Rated}</li>
+    <li class="list-group-item"><strong>Starring</strong>: ${omdbData.Actors}</li>
+    <li class="list-group-item"><strong>Plot</strong>: ${omdbData.Plot}</li>
+    <li class="list-group-item"><strong>Awards</strong>: ${omdbData.Awards}</li>
+    `)
   // ====================================================================================
   // playlistButton's on click function becomes a combination of a lot of the async funcs created earlier
   let playlistButton = $("<button class='btn btn-warning'>");
