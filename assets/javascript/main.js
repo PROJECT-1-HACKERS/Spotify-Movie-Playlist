@@ -15,9 +15,18 @@ $("#movieInputSubmit").click(async function() {
   $("#movieInfo").html(`
     <li class="list-group-item"><strong>Rating</strong>: ${omdbData.Rated}</li>
     <li class="list-group-item"><strong>Starring</strong>: ${omdbData.Actors}</li>
-    <li class="list-group-item"><strong>Plot</strong>: ${omdbData.Plot}</li>
     <li class="list-group-item"><strong>Awards</strong>: ${omdbData.Awards}</li>
     `)
+  $("#moviePlot").html(`
+    <p><strong>Plot</strong>: ${omdbData.Plot}</p>
+    `)
+  $("#boxOffice").html(`
+    <p><strong>Box-Office</strong>: ${omdbData.BoxOffice}</p>
+    `)
+    omdbData.Ratings.map(function(x, i) {
+      $("#ratings").append(`<li class="list-group-item"><strong>${x.Source}</strong>: ${x.Value}</li>
+`)
+    })
   // ====================================================================================
   // playlistButton's on click function becomes a combination of a lot of the async funcs created earlier
   let playlistButton = $("<button class='btn btn-warning'>");
@@ -34,6 +43,7 @@ $("#movieInputSubmit").click(async function() {
       }));
     pushUrl.slice(0, -1);
     spotifyPostToPlaylist(pushUrl);
+    $("#createPlaylistButton").append($("<p>Done! Check your spotify!!</p>"))
   })
   // ====================================================================================
   $("#createPlaylistButton").append(playlistButton);
