@@ -1,15 +1,16 @@
 
 $("#movieInputSubmit").click(async function() {
   let movieName = $("#movieInput").val().trim();
+  // ====================================================================================
+  // Kick off several of the async functions, wait for them to finish so we can use them further down
   let spotifyUserId = await getUserId();
   spotifyUserId = spotifyUserId.id;
   let omdbData = await omdbAjax(movieName);
   let imdbSoundtrackData = await parseimdbAjax(movieName);
+  // ====================================================================================
   $("#soundTrackList").empty();
   $("#createPlaylistButton").empty();
   imdbSoundtrackData.map((data, index) => $("#soundTrackList").append(`<li class='list-group-item'>${index+1}: ${data.trackName}</li>`))
-  // ====================================================================================
-  console.log(omdbData); // this will be the typical OMDB response you're used to
   $("#movieName").text(`${omdbData.Title} (${omdbData.Year})`)
   $("#moviePoster").html(`<img id="moviePoster" src=${omdbData.Poster} class="card-img-top" alt="Card image cap">`)
   $("#movieInfo").html(`
@@ -24,17 +25,18 @@ $("#movieInputSubmit").click(async function() {
     <p><strong>Box-Office</strong>: ${omdbData.BoxOffice}</p>
     `)
     omdbData.Ratings.map(function(x, i) {
-      $("#ratings").append(`<li class="list-group-item"><strong>${x.Source}</strong>: ${x.Value}</li>
-`)
+      $("#ratings").append(`<li class="list-group-item"><strong>${x.Source}</strong>: ${x.Value}</li>`)
     })
   // ====================================================================================
   // playlistButton's on click function becomes a combination of a lot of the async funcs created earlier
   let playlistButton = $("<button class='btn btn-warning'>");
   playlistButton.text("Create Spotify Playlist");
   playlistButton.click(async function() {
+    // Creates a playlist
     let playlistId = await createSpotifyPlaylist(movieName);
     playlistId = playlistId.id;
     let pushUrl = `https://api.spotify.com/v1/users/${spotifyUserId}/playlists/${playlistId}/tracks?uris=`
+    // Searches for all the songs in imdbSoundtrackData, builds the pushUrl
     const searchResults = await Promise.all(imdbSoundtrackData.map(async function(songName, i, arr) {
       let trackUrl = await spotifyTrackSearch(songName.trackName);
       if (trackUrl.tracks.items.length > 0) {
@@ -42,9 +44,9 @@ $("#movieInputSubmit").click(async function() {
       }
       }));
     pushUrl.slice(0, -1);
+    //pushes the search results to your playlist in one go
     spotifyPostToPlaylist(pushUrl);
     $("#createPlaylistButton").append($("<p>Done! Check your spotify!!</p>"))
   })
-  // ====================================================================================
   $("#createPlaylistButton").append(playlistButton);
 })

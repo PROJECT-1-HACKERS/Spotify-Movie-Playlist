@@ -1,6 +1,11 @@
 
 // ====================================================================================
 // This is all spotify Authentication stuff.
+// Spotify's authentication is weird. They initially have you open up their spotify.com/authorize speical URL
+// In that url, you have to specify your own redirect one -- then it redirects you to that if you authorize,
+// and includes a token inside the new redirected URL. That's the token you need for future auth.
+// See "apiredirect.html", and "apiredirect.js"
+// This is lame and weirdly complicated, why couldn't they just return a json object?
 function popitup(url,windowName) {
        newwindow=window.open(url,windowName,'height=700,width=400');
        if (window.focus) {newwindow.focus()}
@@ -19,7 +24,7 @@ $("#spotifyLogin").click(
 
 // ====================================================================================
 
-
+// These are just a series of pretty straight forward async spotify functions
 async function getUserId() {
   const result = $.ajax({
     method: "GET",
