@@ -10,15 +10,13 @@ let scopes = "user-read-email user-read-private user-read-birthdate playlist-mod
 spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a089b7d9d412592492&redirect_uri=${uri_Redirect[0]}&scope=${scopes}&response_type=token`
 
 
-if (localStorage.getItem("spotifyAPItoken") === null) {
-  let linkButton = $("<button class='btn btn-warning'>Log in to Spotify</button>");
-  linkButton.click(() => {
+$("#spotifyLogin").click(
+  function() {
+    localStorage.clear();
     popitup(spotifyWindow, "spotifyAPIAuth");
-    $("#apiWarningModal").modal('hide');
   });
-  $("#spotifyLinker").append(linkButton);
-  $("#apiWarningModal").modal();
-}
+
+
 // ====================================================================================
 
 
