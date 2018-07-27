@@ -17,7 +17,9 @@ spotifyWindow = `http://accounts.spotify.com/authorize?client_id=0bfbe170f82c46a
 
 $("#spotifyLogin").click(
   function() {
-    localStorage.clear();
+    if (!localStorage.getItem("spotifyAPItoken") === null) {
+      localStorage.removeItem("spotifyAPItoken");
+    }
     popitup(spotifyWindow, "spotifyAPIAuth");
   });
 
