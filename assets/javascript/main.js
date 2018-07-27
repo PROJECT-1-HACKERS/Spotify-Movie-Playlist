@@ -50,7 +50,6 @@ $("#movieInputSubmit").click(async function() {
         return `spotify%3Atrack%3A${e.tracks.items[0].id}`;
       }
     })
-    promisedResults.slice(0, -1);
     pushUrl += promisedResults
     //pushes the search results to your playlist in one go
     spotifyPostToPlaylist(pushUrl);
