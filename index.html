@@ -6,7 +6,14 @@
   <!---This is the google font link-->
   <title>
   </title>
-  <!-- <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script> -->
+  <!-- Firebase Initialization and Firebase Authentication -->
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+  <!-- Bootsrap and CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -71,8 +78,27 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
-          <a href="#" class="btn btn-light">Create Account</a>
-          <p class="card-text">Comments section can go here</p>
+          <a href="#" id="createAccountButton" class="btn btn-light">Create Account</a>
+          <p class="card-text" id="comment-here">Comments section can go here</p>
+
+          <!-- Just A test div for testing comment section -->
+          <!-- ====================================================== -->
+          <div id="firebaseui-auth-container"></div>
+          <div id="loader">Loading...</div>
+          
+          
+          <form id="comment">        
+            <!-- <div><label for="name">Name</label>
+            <input type="text" id="name"></div>    -->
+            
+            <div><label for="message">Message</label>
+            <textarea id="message"></textarea></div>
+
+            <div><input type="submit" value="Post Comment"></div>
+              
+          </form>
+          <div id="comments-container"></div>
+          <!-- ====================================================== -->
         </div>
       </div>
     </div>
@@ -174,8 +200,10 @@
       crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
       crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.7.0/js/md5.min.js"></script>
       <script src="./assets/javascript/spotifyAPI.js"></script>
       <script src="./assets/javascript/imdbScraper.js"></script>
+      <script src="./assets/javascript/firebase-comments.js"></script>
       <script src="./assets/javascript/main.js"></script>
 </body>
 
