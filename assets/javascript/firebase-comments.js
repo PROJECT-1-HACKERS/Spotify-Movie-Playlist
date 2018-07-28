@@ -20,7 +20,7 @@ $(document).ready(function () {
 
 
     // Adds Unique ID to Comments
-    var postComments = rootRef.child($("#movieInput").val().trim() || "postComments")
+    var postComments = rootRef.child("postComments")
     var link = window.location.pathname
     var pathkey = decodeURI(link.replace(new RegExp('\\/|\\.', 'g'),"_"));
     var postRef = postComments.child(pathkey);
