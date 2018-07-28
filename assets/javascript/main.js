@@ -45,11 +45,14 @@ $("#movieInputSubmit").click(async function() {
       trackSearches.push(spotifyTrackSearch(imdbSoundtrackData[i].trackName));
     }
     let promisedResults = await Promise.all(trackSearches);
-    promisedResults = promisedResults.map(function(e, i) {
+    promisedResults = promisedResults.map(function(e, i, arr) {
       if (e.tracks.items.length > 0) {
         return `spotify%3Atrack%3A${e.tracks.items[0].id}`;
-      }
+      } else {return ''}
     })
+    // If it doesn't find a song at all, it returns an empty string back to the promisedResults array.
+    // this will remove those before it concats them into the search string
+    promisedResults = promisedResults.filter(Boolean);
     pushUrl += promisedResults
     //pushes the search results to your playlist in one go
     spotifyPostToPlaylist(pushUrl);
