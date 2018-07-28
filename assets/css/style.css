@@ -42,11 +42,10 @@
     position: relative;
     padding: 10px !important;
     margin-top: 70px !important;
-    background: #eee;
     margin-top: 23px;
     text-align: center;
     margin-bottom: 0 !important;
     border-radius: 25px;
-    border: white;
-    background: url("https://t3.ftcdn.net/jpg/01/50/02/58/240_F_150025823_0rxPftXVTDeFvuwRD166mUqVDcJaeNYV.jpg")
+    background: url("https://t3.ftcdn.net/jpg/01/50/02/58/240_F_150025823_0rxPftXVTDeFvuwRD166mUqVDcJaeNYV.jpg");
+    
 }
