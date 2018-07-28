@@ -14,13 +14,13 @@ $(document).ready(function () {
 
     // Set Firebase Ref as a Variable
     var rootRef = firebase.database().ref();
-
+    
 
     // User Comments
 
 
     // Adds Unique ID to Comments
-    var postComments = rootRef.child('postComments');
+    var postComments = rootRef.child($("#movieInput").val().trim() || "postComments")
     var link = window.location.pathname
     var pathkey = decodeURI(link.replace(new RegExp('\\/|\\.', 'g'),"_"));
     var postRef = postComments.child(pathkey);
@@ -28,7 +28,7 @@ $(document).ready(function () {
     // Controls Submit Button
     $("#comment").submit(function(e) {
         e.preventDefault();
-        postRef.push().set({
+        postRef.push({
             name: firebase.auth().currentUser.displayName,
             message: $("#message").val(),
             md5Email: md5($("#email").val()),

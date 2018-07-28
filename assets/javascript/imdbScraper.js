@@ -11,9 +11,6 @@ function imdbAjax(name, callback){
       url: queryURL,
       method: "GET"
   }).then(function(response) {
-    // console.log(response);
-  // }
-
     // Passes OMDb targeted response into cors.io to read specific web page
     $.ajax( {
       url: `https://cors.io/?https://www.imdb.com/title/${response.imdbID}/soundtrack`,
@@ -25,9 +22,6 @@ function imdbAjax(name, callback){
 
       // Parses web page to legible HTML
       body = '<div id="body-mock">' + result.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
-
-      // Target specific div needed
-      // var $body = $("#soundtracks_content", body).children().children();
 
       // This checks a specific spot in some of these soundtrack pages, for a huge piece of json that has all the data we need, in a specific react script tag Some have it, some don't.
       // This will increase our accuracy, webscraping is hard because we are at the whims of the host-site gods, and however they decided to format that particular page
