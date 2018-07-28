@@ -6,14 +6,7 @@
   <!---This is the google font link-->
   <title>
   </title>
-  <!-- Firebase Initialization and Firebase Authentication -->
-  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-
-  <!-- Firebase SDK -->
-  <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
-
-  <!-- Bootsrap and CSS -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -31,10 +24,10 @@
 </div>
 <br>
 <div class="row justify-content-between">
-  <div class="col-md-7">
+  <div class="col-md-4">
     <div class="card">
       <div class="card-header">
-        Featured
+        <button class="btn btn-light" id="spotifyLogin">Authorize with Spotify</button>
       </div>
       <br>
       <!-- ============-->
@@ -59,44 +52,101 @@
         <br>
         <br>
         <h5 class="card-title">Movie Playlist</h5>
-        <ul class="list-group list-group-flush"><strong>Soundtrack</strong>
+        <ul class="list-group list-group-flush">
           <div id="createPlaylistButton"></div>
           <div id="soundTrackList">
           </div>
         </ul>
-        <div class="card-body">
-          <a href="#" class="btn-outline-success">Add Song</a>
-          <br>
-          <a href="#" class="btn-outline-success">Create Playlist</a>
-        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Comment Section
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div id="movieName" class="card-header">
+              Movie Stuff!
+            </div>
+            <div class="card-body">
+              <ul id="movieInfo" class="list-group">
+              </ul>
+              <!-- <br>
+              <h5 class="card-title">Special title treatment</h5>
+              <a href="#" class="btn btn-light">Create Account</a>
+              <p class="card-text">Comments section can go here</p> -->
+            </div>
+            <div id="moviePoster"></div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <a href="#" id="createAccountButton" class="btn btn-light">Create Account</a>
-          <p class="card-text" id="comment-here">Comments section can go here</p>
 
-          <!-- Just A test div for testing comment section -->
-          <!-- ====================================================== -->
-          <div id="firebaseui-auth-container"></div>
-          <div id="loader">Loading...</div>
-          
-          
-          <form id="comment">    
-            <div><label for="message">Message</label>
-            <textarea id="message"></textarea></div>
+        <div class="col-md-12">
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Trivia Fact #1
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="moviePlot" class="card-body">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Trivia fact #2
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div id="boxOffice" class="card-body">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
 
-            <div><input type="submit" value="Post Comment"></div>
-              
-          </form>
-          <div id="comments-container"></div>
-          <!-- ====================================================== -->
+                  <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Trivia fact #2
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div id="ratings" class="card-body">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col-md-12">
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <a href="#" id="createAccountButton" class="btn btn-light">Create Account</a>
+            <p class="card-text" id="comment-here">Comments section can go here</p>
+
+            <!-- Just A test div for testing comment section -->
+            <!-- ====================================================== -->
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+
+
+            <form id="comment">
+              <div><label for="message">Message</label>
+                <textarea id="message"></textarea></div>
+
+                <div><input type="submit" value="Post Comment"></div>
+
+              </form>
+              <div id="comments-container"></div>
+              <!-- ====================================================== -->
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -104,69 +154,6 @@
   <br>
   <br>
 
-  <!--TRIVAAAAAAAAAAAA-->
-  <div class="triva">
-    <div class="col-md-7">
-      <div id="accordion">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Trivia Fact #1
-              </button>
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-              non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-              sunt
-
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Trivia fact #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-              non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h5 class="mb-0">
-
-              <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Trivia fact #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-              non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-              sunt
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-
-  </div>
-  <br>
-  <br>
-  <br>
   <div class="modal fade" id="apiWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -197,11 +184,7 @@
       crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
       crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.7.0/js/md5.min.js"></script>
       <script src="./assets/javascript/spotifyAPI.js"></script>
       <script src="./assets/javascript/imdbScraper.js"></script>
-      <script src="./assets/javascript/firebase-comments.js"></script>
       <script src="./assets/javascript/main.js"></script>
 </body>
-
-</html>
