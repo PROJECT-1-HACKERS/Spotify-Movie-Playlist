@@ -1,6 +1,6 @@
 async function omdbAjax(name) {
   const result = $.ajax( {
-      url: `http://www.omdbapi.com/?t=${name}&apikey=76978dc&plot=full`,
+      url: `https://www.omdbapi.com/?t=${name}&apikey=76978dc&plot=full`,
       method: "GET"
   })
   return result
