@@ -6,7 +6,9 @@
   <!---This is the google font link-->
   <title>
   </title>
-  <!-- <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -84,7 +86,7 @@
               <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
                   <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Trivia Fact #1
+                    Movie Plot!
                   </button>
                 </h5>
               </div>
@@ -97,7 +99,7 @@
               <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
                   <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Trivia fact #2
+                    Box Office stuff!
                   </button>
                 </h5>
               </div>
@@ -111,7 +113,7 @@
                 <h5 class="mb-0">
 
                   <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Trivia fact #2
+                    Ratings!
                   </button>
                 </h5>
               </div>
@@ -120,29 +122,44 @@
                 </div>
               </div>
             </div>
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+
+                  <button class="btn btn-outline-light" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Comments section
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body">
+                  <h5 class="card-title">Comments</h5>
+                  <a href="#" id="createAccountButton" class="btn btn-light">Create Account</a>
+                  <p class="card-text" id="comment-here">Comments section can go here</p>
+
+                  <div id="firebaseui-auth-container"></div>
+                  <div id="loader">Loading...</div>
+
+
+                  <form id="comment">
+                    <div><label for="message">Message</label>
+                      <textarea id="message"></textarea></div>
+
+                      <div><input type="submit" value="Post Comment"></div>
+
+                    </form>
+                    <div id="comments-container"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- <div class="col-md-12">
+        <div class="col-md-12">
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <a href="#" id="createAccountButton" class="btn btn-light">Create Account</a>
-            <p class="card-text" id="comment-here">Comments section can go here</p>
 
-            <div id="firebaseui-auth-container"></div>
-            <div id="loader">Loading...</div>
-
-
-            <form id="comment">
-              <div><label for="message">Message</label>
-                <textarea id="message"></textarea></div>
-
-                <div><input type="submit" value="Post Comment"></div>
-
-              </form>
-              <div id="comments-container"></div>
 
             </div>
-          </div> -->
+          </div>
         </div>
 
       </div>
@@ -182,9 +199,10 @@
       crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
       crossorigin="anonymous"></script>
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.7.0/js/md5.min.js"></script> -->
-      <!-- <script src="./assets/javascript/firebase-comments.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.7.0/js/md5.min.js"></script>
+      <script src="./assets/javascript/firebase-comments.js"></script>
       <script src="./assets/javascript/spotifyAPI.js"></script>
       <script src="./assets/javascript/imdbScraper.js"></script>
       <script src="./assets/javascript/main.js"></script>
 </body>
+</html>
