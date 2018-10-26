@@ -1,4 +1,4 @@
-# Bootcamp Project 1
+# Spotify Movie Playlist
 
 Utilizes OMDb API to find soundtrack info from user submitted movie then creates a spotify playlist out of said tracklist. You MUST have a Spotify account to use this application.
 
@@ -14,7 +14,7 @@ To install this application locally, please run the following in your Bash termi
 git clone git@github.com:PROJECT-1-HACKERS/Spotify-Movie-Playlist.git
 ```
 
-## Getting Started
+## Creating Playlist
 
 **Note:** You MUST have a spotify account for this application to work.
 
