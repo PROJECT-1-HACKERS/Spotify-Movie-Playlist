@@ -49,3 +49,4 @@ async function parseimdbAjax(name) {
       }
       return returnData;
     }
+
