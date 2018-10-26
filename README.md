@@ -4,7 +4,7 @@ Utilizes OMDb API to find soundtrack info from user submitted movie then creates
 
 ## Demo
 
-Please check out the demo of this application [here.](https://project-1-hackers.github.io/Spotify-Movie-Playlist/)
+Please check out the demo of this application [here.](https://corey-mitchell.github.io/Spotify-Movie-Playlist/)
 
 ## Local Installation
 
